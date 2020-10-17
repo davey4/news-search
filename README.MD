@@ -47,7 +47,7 @@
 
 ### Authors
 ---
-David Martel
+**David Martel**
 
 ##### Contact Info
 ---
