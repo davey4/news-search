@@ -12,12 +12,14 @@
 ---
 
 1. clone this repo
-
-   `''git clone https://github.com/searchEngine.git'''`
+   ```
+   git clone https://github.com/davey4/search-engine.git
+   ```
 
 2. go to folder
-
-   ```cd searchEngine```
+   ```
+   cd search-engine
+   ```
 
 3. Open in your browser! :tada:
 
@@ -53,11 +55,11 @@ David Martel
 - daveymartel@gmail.com
 ##### Progress
 ---
-- https://trello.com/davidmartel11/boards
+- https://trello.com/b/twEquczq/search-engine
 
 #### API snippet
 
----
+----
 
 ```
 "divisions": [{   
