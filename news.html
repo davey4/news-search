@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>news</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="news.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="./news.html"><div class="nav">News</div></a>
+        <a href="./weather.html"><div class="nav">Weather</div></a>
+        <a href="./sports.html"><div class="nav">Sports</div></a>
+        <a href=""><div id="contact" class="nav">Contact</div></a>
+      </nav>
+      <h1>NEWS</h1>
+      <div class="selection">
+        <div id="most-pop-click" class="selection">Most Popular Stories</div>
+        <div id="top-click" class="selection">Top Stories</div>
+      </div>
+    </header>
+    <form class="search-bar">
+      <input
+        type="text"
+        id="search-bar"
+        placeholder="Search....."
+        name="search"
+      />
+      <button type="submit" id="search-btn">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+    <aside class="stock-search">Check Stocks
+      <form>
+        <input
+        type="text"
+        id="stock-search"
+        placeholder="Stock Symbol"
+        name="search"
+        />
+        <button type="submit" id="stock-btn">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+    </aside>
+    <section>
+    </section>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./news.js"></script>
+  </body>
+</html>
