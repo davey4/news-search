@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="weather.css" />
+  </head>
+  <body class="bg">
+    <header>
+      <nav>
+        <a href="./news.html"><div class="nav">News</div></a>
+        <a href="./weather.html"><div class="nav">Weather</div></a>
+        <a href="./sports.html"><div class="nav">Sports</div></a>
+        <a href=""><div id="contact" class="nav">Contact</div></a>
+      </nav>
+      <h1>Weather Forecast</h1>
+    </header>
+    <form>
+      <input
+        type="text"
+        id="search-bar"
+        placeholder="City, State or zipcode"
+        name="search"
+      />
+      <button type="submit" id="search-btn">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+    <section>
+      <div class="location"></div>
+      <div class="astronamy">Lunar Cycle</div>
+    </section>
+    <main>
+      <div class="curr-weather">
+        Current
+        <div class="curr-content"></div>
+      </div>
+      <div class="forecast">Forecast</div>
+    </main>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./weather.js"></script>
+  </body>
+</html>

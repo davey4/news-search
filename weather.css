@@ -1,0 +1,127 @@
+body {
+  background-image: url("https://media.istockphoto.com/photos/landscape-of-the-clear-sky-picture-id1186224156?b=1&k=6&m=1186224156&s=170667a&w=0&h=13Hx_T1BeHthUf5kiuffkzn5KAD0vgI2yF8GK0chbpk=");
+  background-position: center;
+  background-size: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  font-size: 200%;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  background-color: #151516;
+  box-shadow: 1px 2px 30px white;
+  border-radius: 15px;
+}
+#contact {
+  position: absolute;
+  right: 1%;
+}
+.nav {
+  margin: 10px;
+  color: white;
+}
+#contact {
+  display: flex;
+  flex-direction: row-reverse;
+  left: 500px;
+}
+a:link {
+  text-decoration: none;
+}
+a:link:hover {
+  text-decoration: underline;
+  text-decoration-color: white;
+  border: 1px solid white;
+}
+form {
+  margin-bottom: 75px;
+}
+form input[type="text"] {
+  padding: 10px;
+  font-size: 20px;
+  font-style: bold;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  margin-left: 20px;
+}
+form button {
+  float: left;
+  width: 15%;
+  padding: 10px;
+  background: #2196f3;
+  color: white;
+  font-size: 20px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+header {
+  height: 250px;
+}
+
+h1 {
+  margin-left: 20%;
+  font-size: 300%;
+}
+main {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+.curr-weather {
+  margin-left: 20px;
+  font-size: 175%;
+  font-weight: bold;
+}
+.curr-content {
+  background-image: url("https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009__340.png");
+  background-repeat: no-repeat;
+  height: 300px;
+  margin: 0px 20px;
+  box-shadow: 1px -2px 3px white;
+}
+.curr-display {
+  font-size: 50%;
+}
+
+.forecast {
+  font-size: 175%;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 2px 1fr 1fr 1fr;
+}
+.nextDay {
+  margin-top: 60px;
+  font-size: 50%;
+  font-weight: bold;
+  background-image: url("https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009__340.png");
+  background-repeat: no-repeat;
+  margin-right: 20px;
+  box-shadow: 1px -2px 3px white;
+}
+section {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+.location {
+  font-weight: bolder;
+  text-align: center;
+  font-size: 200%;
+}
+.astronamy {
+  font-size: 175%;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 20px;
+}
+.astro {
+  font-size: 50%;
+  right: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2013/07/13/10/23/moon-157119__340.png");
+  box-shadow: 1px -2px 3px white;
+}
