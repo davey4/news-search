@@ -1,5 +1,5 @@
 body{
-    background-color: aqua;
+    /* background-color: aqua; */
     font-family: "Roboto", sans-serif;
     font-style: italic;
     font-size: 200%;
@@ -26,4 +26,37 @@ nav {
     text-decoration: underline;
     text-decoration-color: white;
     border: 1px solid white;
+  }
+  header{
+    background-image: url('https://wwwimage-secure.cbsstatic.com/base/files/show_page/9610af1ce22cbc47_nfl_about_web_1400x440.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 500px;
+  }
+  #nfl-event-display{
+   font-size: 50px;
+   font-weight: bolder;
+  }
+  .nflEvent {
+    border: 2px solid black;
+    height: 300px;
+    margin: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+    font-size: 30px;
+    font-weight: bold;
+    /* font-size: 40px; */
+  }
+  .description {
+    margin-right: 40%;
+    margin-top: 10px;
+  }
+  select{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    position: absolute;
+    right: 20px;
   }
