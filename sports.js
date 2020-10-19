@@ -17,7 +17,10 @@ const getNflGames = async () => {
 
 const listNflGames = (data) => {
   let display = document.querySelector("#nfl-event-display");
+  removeElements(document.querySelectorAll(".teamDisplay"));
+  removeElements(document.querySelectorAll('teamSched'))
   let events = document.createElement("div");
+  events.className = "events";
   events.innerText = "Upcoming NFL Games";
   data.forEach((element) => {
     let event = document.createElement("div");
@@ -26,11 +29,11 @@ const listNflGames = (data) => {
     description.className = "description";
     event.className = "nflEvent";
     event.style.backgroundImage = `url(${element.strThumb})`;
-    
+
     event.innerText = element.strEvent;
     time.innerText = `Date: ${element.dateEvent} Kickoff: ${element.strTime}`;
     description.innerText = element.strDescriptionEN;
-    
+
     time.appendChild(description);
     event.appendChild(time);
     events.appendChild(event);
@@ -39,43 +42,96 @@ const listNflGames = (data) => {
 };
 // getNflGames();
 
-
-const getNflTeams = async() => {
+const getNflTeams = async () => {
   const LIST_ALL_NFL_TEAMS = `https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=${NFL_ID}`;
-  try { 
-    let response = await axios.get(LIST_ALL_NFL_TEAMS)
-    fillNflDropdown(response.data.teams)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-const fillNflDropdown = (data) =>{
-  // console.log(data)
-  let dropDownDiv = document.querySelector('#nfl-dropdown')
-  let dropDown = document.createElement('select')
-  dropDown.addEventListener('change', nflTeamPage)
-  data.forEach((element) =>{
-    let optionElement = document.createElement('option')
-    optionElement.innerText = `${element.strTeam}`
-    optionElement.setAttribute('value', element.idTeam)
-    dropDown.appendChild(optionElement)
-  })
-  dropDownDiv.appendChild(dropDown)
-}
-
-const nflTeamPage = async(e) =>{
-  let teamId = e.target.value
-  const LOOK_UP_NFL_TEAM = `https://www.thesportsdb.com/api/v1/json/1/lookupteam.php?id=${teamId}`
   try {
-    let response = await axios.get(LOOK_UP_NFL_TEAM)
-    console.log(response)
+    let response = await axios.get(LIST_ALL_NFL_TEAMS);
+    fillNflDropdown(response.data.teams);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-window.onload = ()=>{
-  getNflTeams()
-  getNflGames()
-}
+const fillNflDropdown = (data) => {
+  let dropDownDiv = document.querySelector("#nfl-dropdown");
+  let dropDown = document.createElement("select");
+  dropDown.addEventListener("change", nflTeamPage);
+  dropDown.addEventListener("change", getTeamSched);
+  data.forEach((element) => {
+    let optionElement = document.createElement("option");
+    optionElement.innerText = `${element.strTeam}`;
+    optionElement.setAttribute("value", element.idTeam);
+    dropDown.appendChild(optionElement);
+  });
+  dropDownDiv.appendChild(dropDown);
+};
+
+const nflTeamPage = async (e) => {
+  let teamId = e.target.value;
+  const LOOK_UP_NFL_TEAM = `https://www.thesportsdb.com/api/v1/json/1/lookupteam.php?id=${teamId}`;
+  try {
+    let response = await axios.get(LOOK_UP_NFL_TEAM);
+    displayTeamInfo(response.data.teams);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const displayTeamInfo = (data) => {
+  removeElements(document.querySelectorAll(".events"));
+  let display = document.querySelector("#nfl-team-info");
+  removeElements(document.querySelectorAll(".teamDisplay"));
+  let teamDisplay = document.createElement("div");
+  teamDisplay.className = "teamDisplay";
+  let banner = data[0].strTeamBanner;
+
+  teamDisplay.style.backgroundImage = `url(${banner})`;
+
+  display.appendChild(teamDisplay);
+};
+
+const getTeamSched = async (e) => {
+  let teamId = e.target.value;
+  const LOOK_UP_TEAM_SCHEDULE = `https://www.thesportsdb.com/api/v1/json/1/eventsnext.php?id=${teamId}`;
+  try {
+    let response = await axios.get(LOOK_UP_TEAM_SCHEDULE);
+    displayTeamSched(response.data.events);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const displayTeamSched = (data) => {
+  console.log(data);
+  let display = document.querySelector("#nfl-team-info");
+  removeElements(document.querySelectorAll('.teamSched'))
+  let teamSched = document.createElement('div')
+  teamSched.className = 'teamSched'
+    data.forEach((element) =>{
+    let event = document.createElement("div");
+    let time = document.createElement("div");
+    let description = document.createElement("div");
+    description.className = "description";
+    event.className = "nflEvent";
+    event.style.backgroundImage = `url(${element.strThumb})`;
+
+    event.innerText = element.strEvent;
+    time.innerText = `Date: ${element.dateEvent} Kickoff: ${element.strTime}`;
+    description.innerText = element.strDescriptionEN;
+
+    time.appendChild(description);
+    event.appendChild(time);
+    teamSched.appendChild(event);
+  })
+  display.appendChild(teamSched)
+};
+
+const removeElements = (elms) => elms.forEach((el) => el.remove());
+
+const upcomingGames = document.querySelector("#upcoming-games");
+upcomingGames.addEventListener("click", getNflGames);
+
+window.onload = () => {
+  getNflTeams();
+  getNflGames();
+};
