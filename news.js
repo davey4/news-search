@@ -156,14 +156,14 @@ const searchStocks = async() =>{
 
 const displayStocks = (data) => {
   let results = document.createElement("div");
-  let resultHeader = document.createElement("h1");
+  let resultHeader = document.createElement("h2");
   let currentPriceDisplay = document.createElement("h3");
   let openPriceDisplay = document.createElement("h3");
   let highPriceDisplay = document.createElement("h3");
   let lowPriceDisplay = document.createElement("h3");
 
   results.className = "stock-result";
-  resultHeader.innerText = data.symbol;
+  resultHeader.innerText = data.symbol.toUpperCase();
   currentPriceDisplay.innerText = `Current Price is: $${data.currentPrice}`;
   openPriceDisplay.innerText = `Opening Price: $${data.openPrice}`;
   highPriceDisplay.innerText = `High Price of the Day: $${data.highPrice}`;

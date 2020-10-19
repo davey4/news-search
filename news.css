@@ -36,9 +36,13 @@ a:link:hover {
 }
 header{
   background-image: url('https://image.freepik.com/free-photo/slate-texture-background_24972-292.jpg');
+
 }
 h1 {
-  margin-left: 20%;
+  margin-left: 15%;
+  font-family: 'Lobster Two', cursive;
+  text-decoration: underline;
+  font-size: 300%;
 }
 .selection {
   display: flex;
@@ -111,11 +115,12 @@ h1 {
 .search {
   margin-top: 20px;
   margin-right: 20%;
-  
+  margin-left: 35px;
 }
 .searchedStory {
   /* text-align: center; */
-  margin: 20px 35px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   background-color: #090a0a;
   color: white;
   background-repeat: no-repeat;
