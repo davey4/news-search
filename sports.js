@@ -18,7 +18,7 @@ const getNflGames = async () => {
 const listNflGames = (data) => {
   let display = document.querySelector("#nfl-event-display");
   removeElements(document.querySelectorAll(".teamDisplay"));
-  removeElements(document.querySelectorAll('teamSched'))
+  removeElements(document.querySelectorAll('.teamSched'))
   let events = document.createElement("div");
   events.className = "events";
   events.innerText = "Upcoming NFL Games";

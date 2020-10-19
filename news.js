@@ -19,15 +19,13 @@ const displayMostPop = (data) => {
   removeElements(document.querySelectorAll(".search"));
   let mostPopDiv = document.createElement("div");
   mostPopDiv.className = "most-pop";
-  // mostPopDiv.innerText = "Most Popular Stories";
+  mostPopDiv.innerText = "Most Popular Stories";
 
   data.forEach((element) => {
-    // console.log(element.media.caption);
     let title = document.createElement("div");
     title.className = "popStory";
     title.innerText = element.title;
     title.setAttribute("href", element.url);
-    // title.style.backgroundImage = `url(${element.multimedia[0].url})`
     title.addEventListener("click", function () {
       window.open(`${element.url}`, "_blank");
     });
@@ -58,14 +56,13 @@ const displayTopStories = (data) => {
   removeElements(document.querySelectorAll(".search"));
   let topDiv = document.createElement("div");
   topDiv.className = "top";
-  // topDiv.innerText = "Top Stories";
+  topDiv.innerText = "Top Stories";
 
   data.forEach((element) => {
     let title = document.createElement("div");
     title.className = "topStory";
     title.innerText = element.title;
     title.setAttribute("href", element.url);
-    title.style.backgroundImage = `url(${element.multimedia[4].url})`;
     title.addEventListener("click", function () {
       window.open(`${element.url}`, "_blank");
     });
