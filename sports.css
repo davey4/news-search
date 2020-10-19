@@ -1,0 +1,29 @@
+body{
+    background-color: aqua;
+    font-family: "Roboto", sans-serif;
+    font-style: italic;
+    font-size: 200%;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    box-shadow: 1px 2px 30px white;
+    border-radius: 15px;
+  }
+  .nav {
+    margin: 10px;
+    color: white;
+  }
+  #contact {
+    position: absolute;
+    right: 1%;
+  }
+  a:link {
+    text-decoration: none;
+  }
+  a:link:hover {
+    text-decoration: underline;
+    text-decoration-color: white;
+    border: 1px solid white;
+  }
