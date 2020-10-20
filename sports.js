@@ -34,8 +34,8 @@ const listNflGames = (data) => {
     time.innerText = `Date: ${element.dateEvent} Kickoff: ${element.strTime}`;
     description.innerText = element.strDescriptionEN;
 
-    time.appendChild(description);
     event.appendChild(time);
+    event.appendChild(description);
     events.appendChild(event);
   });
   display.appendChild(events);
@@ -119,8 +119,8 @@ const displayTeamSched = (data) => {
     time.innerText = `Date: ${element.dateEvent} Kickoff: ${element.strTime}`;
     description.innerText = element.strDescriptionEN;
 
-    time.appendChild(description);
     event.appendChild(time);
+    event.appendChild(description);
     teamSched.appendChild(event);
   })
   display.appendChild(teamSched)

@@ -3,6 +3,33 @@ const searchBar = document.querySelector("#search-bar");
 const searchBtn = document.querySelector("#search-btn");
 const section = document.querySelector("section");
 
+class Article {
+  constructor(title, story, url) {
+    this.title = title;
+    this.story = story;
+    this.url = url;
+  }
+  displayArticles() {
+    let url = this.url;
+    let articleDiv = document.createElement("div");
+    articleDiv.className = "article";
+    let title = document.createElement("div");
+    title.className = "articleTitle";
+    title.innerText = this.title;
+    title.setAttribute("href", this.url);
+    title.addEventListener("click", function () {
+      window.open(`${url}`, "_blank");
+    });
+    let abstract = document.createElement("div");
+    abstract.className = "description";
+    abstract.innerText = this.story;
+
+    title.appendChild(abstract);
+    articleDiv.appendChild(title);
+    section.appendChild(articleDiv);
+  }
+}
+
 const getMostPop = async () => {
   const URl_MOST_POP = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
   try {
@@ -14,30 +41,16 @@ const getMostPop = async () => {
 };
 
 const displayMostPop = (data) => {
-  removeElements(document.querySelectorAll(".top"));
-  removeElements(document.querySelectorAll(".most-pop"));
+  removeElements(document.querySelectorAll(".article"));
   removeElements(document.querySelectorAll(".search"));
   let mostPopDiv = document.createElement("div");
-  mostPopDiv.className = "most-pop";
+  mostPopDiv.className = "search";
   mostPopDiv.innerText = "Most Popular Stories";
-
-  data.forEach((element) => {
-    let title = document.createElement("div");
-    title.className = "popStory";
-    title.innerText = element.title;
-    title.setAttribute("href", element.url);
-    title.addEventListener("click", function () {
-      window.open(`${element.url}`, "_blank");
-    });
-
-    let abstract = document.createElement("div");
-    abstract.className = "description";
-    abstract.innerText = element.abstract;
-
-    title.appendChild(abstract);
-    mostPopDiv.appendChild(title);
-  });
   section.appendChild(mostPopDiv);
+  data.forEach((element) => {
+    let story = new Article(element.title, element.abstract, element.url);
+    story.displayArticles();
+  });
 };
 
 const getTopStories = async () => {
@@ -51,30 +64,16 @@ const getTopStories = async () => {
 };
 
 const displayTopStories = (data) => {
-  removeElements(document.querySelectorAll(".most-pop"));
-  removeElements(document.querySelectorAll(".top"));
+  removeElements(document.querySelectorAll(".article"));
   removeElements(document.querySelectorAll(".search"));
-  let topDiv = document.createElement("div");
-  topDiv.className = "top";
-  topDiv.innerText = "Top Stories";
-
+  let searchDiv = document.createElement("div");
+  searchDiv.className = "search";
+  searchDiv.innerText = "Top Stories";
+  section.appendChild(searchDiv);
   data.forEach((element) => {
-    let title = document.createElement("div");
-    title.className = "topStory";
-    title.innerText = element.title;
-    title.setAttribute("href", element.url);
-    title.addEventListener("click", function () {
-      window.open(`${element.url}`, "_blank");
-    });
-
-    let abstract = document.createElement("div");
-    abstract.className = "description";
-    abstract.innerText = element.abstract;
-
-    title.appendChild(abstract);
-    topDiv.appendChild(title);
+    let story = new Article(element.title, element.abstract, element.url);
+    story.displayArticles();
   });
-  section.appendChild(topDiv);
 };
 
 const searchStories = async () => {
@@ -89,30 +88,20 @@ const searchStories = async () => {
 };
 
 const displaySearch = (data, search) => {
-  removeElements(document.querySelectorAll(".most-pop"));
-  removeElements(document.querySelectorAll(".top"));
+  removeElements(document.querySelectorAll(".article"));
   removeElements(document.querySelectorAll(".search"));
   let searchDiv = document.createElement("div");
   searchDiv.className = "search";
   searchDiv.innerText = `Showing Search Results for ${search}`;
-
-  data.forEach((element) => {
-    let title = document.createElement("div");
-    title.className = "searchedStory";
-    title.innerText = element.headline.main;
-    // title.style.backgroundImage = `url(${element.multimedia[0].url})`;
-    title.setAttribute("href", element.web_url);
-    title.addEventListener("click", function () {
-      window.open(`${element.web_url}`, "_blank");
-    });
-    let abstract = document.createElement("div");
-    abstract.className = "description";
-    abstract.innerText = element.abstract;
-
-    title.appendChild(abstract);
-    searchDiv.appendChild(title);
-  });
   section.appendChild(searchDiv);
+  data.forEach((element) => {
+    let story = new Article(
+      element.headline.main,
+      element.abstract,
+      element.web_url
+    );
+    story.displayArticles();
+  });
 };
 
 const removeElements = (elms) => elms.forEach((el) => el.remove());
@@ -130,11 +119,11 @@ FINHUB_API_KEY = "bu6qdbf48v6rghl7ibdg";
 
 const stockSearch = document.querySelector("#stock-search");
 const stockBtn = document.querySelector("#stock-btn");
-const aside = document.querySelector('aside')
+const aside = document.querySelector("aside");
 
-const searchStocks = async() =>{
-  let search = stockSearch.value
-  const PRICE_DATA_URL = `https://finnhub.io/api/v1/quote?symbol=${search}&token=${FINHUB_API_KEY}`
+const searchStocks = async () => {
+  let search = stockSearch.value;
+  const PRICE_DATA_URL = `https://finnhub.io/api/v1/quote?symbol=${search}&token=${FINHUB_API_KEY}`;
   try {
     const response = await axios.get(PRICE_DATA_URL);
     let priceData = response.data;
@@ -147,9 +136,9 @@ const searchStocks = async() =>{
     };
     displayStocks(data);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 const displayStocks = (data) => {
   let results = document.createElement("div");
@@ -164,9 +153,9 @@ const displayStocks = (data) => {
   currentPriceDisplay.innerText = `Current Price is: $${data.currentPrice}`;
   openPriceDisplay.innerText = `Opening Price: $${data.openPrice}`;
   highPriceDisplay.innerText = `High Price of the Day: $${data.highPrice}`;
-  highPriceDisplay.style.color = 'green'
+  highPriceDisplay.style.color = "green";
   lowPriceDisplay.innerText = `Low Price of the Day: $${data.lowPrice}`;
-  lowPriceDisplay.style.color = 'red'
+  lowPriceDisplay.style.color = "red";
 
   results.appendChild(resultHeader);
   results.appendChild(currentPriceDisplay);
@@ -174,8 +163,7 @@ const displayStocks = (data) => {
   results.appendChild(highPriceDisplay);
   results.appendChild(lowPriceDisplay);
   aside.appendChild(results);
-}
-
+};
 
 stockSearch.addEventListener("change", searchStocks);
 stockBtn.addEventListener("click", function (e) {
@@ -183,4 +171,3 @@ stockBtn.addEventListener("click", function (e) {
 });
 
 window.onload = getTopStories;
-
