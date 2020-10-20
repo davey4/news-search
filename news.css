@@ -139,7 +139,7 @@ h1 {
 }
 .stock-search {
   position: absolute;
-  right: 100px;
+  right: 80px;
   display: flex;
   flex-direction: column;
 }

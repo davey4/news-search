@@ -81,7 +81,8 @@ main {
   font-weight: bold;
 }
 .curr-content {
-  background-image: url("https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009__340.png");
+  /* color: black; */
+  /* background-image: url("https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009__340.png"); */
   background-repeat: no-repeat;
   height: 300px;
   margin: 0px 20px;
@@ -101,7 +102,7 @@ main {
   margin-top: 60px;
   font-size: 50%;
   font-weight: bold;
-  background-image: url("https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009__340.png");
+  /* background-image: url("https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009__340.png"); */
   background-repeat: no-repeat;
   margin-right: 20px;
   box-shadow: 1px -2px 3px white;
@@ -124,6 +125,7 @@ section {
 .astro {
   font-size: 50%;
   right: 20px;
-  background-image: url("https://cdn.pixabay.com/photo/2013/07/13/10/23/moon-157119__340.png");
+  background-image: url("https://cdn.pixabay.com/photo/2017/01/17/16/45/night-1987408__340.png");
+  background-position: center;
   box-shadow: 1px -2px 3px white;
 }

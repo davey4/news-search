@@ -21,8 +21,9 @@ const onLoadCities = [
 ];
 
 const weatherCards = {
-  partlyCloudy: 'https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009__340.png'
-}
+  partlyCloudy:
+    "https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009__340.png",
+};
 
 const onLoad = () => {
   let search = onLoadCities[Math.floor(Math.random() * onLoadCities.length)];
@@ -67,6 +68,10 @@ const displayCurrentWeather = (data) => {
     `Gusts: ${curr.gust_mph} MPH`,
     `Wind Direction: ${curr.wind_dir}`,
   ];
+
+  display.style.backgroundImage = `url(${backgroundImage(
+    curr.condition.text
+  )})`;
 
   currArr.forEach((element) => {
     let currentWeatherDiv = document.createElement("div");
@@ -123,7 +128,10 @@ const displayForecast = (data) => {
 
     let nextDayDiv = document.createElement("div");
     nextDayDiv.className = "nextDay";
-  
+    nextDayDiv.style.backgroundImage = `url(${backgroundImage(
+      day.day.condition.text
+    )})`;
+
     highDiv.appendChild(lowDiv);
     precipDiv.appendChild(highDiv);
     chanceSnowDiv.appendChild(precipDiv);
@@ -204,6 +212,81 @@ const displayAstronamy = (data) => {
   sunriseDiv.appendChild(sunsetDiv);
   astroDiv.appendChild(sunriseDiv);
   display.appendChild(astroDiv);
+};
+
+const backgroundImage = (condition) => {
+  console.log(condition.toLowerCase());
+  switch (condition.toLowerCase()) {
+    case "light rain":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/22/cloud-37011__340.png";
+      break;
+    case "moderate rain":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/22/cloud-37011__340.png";
+      break;
+    case "rain showers":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/22/cloud-37011__340.png";
+      break;
+    case "patchy rain possible":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/22/cloud-37011__340.png";
+      break;
+    case "rain":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/22/cloud-37011__340.pn";
+      break;
+    case "heavy rain":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/22/cloud-37011__340.png";
+      break;
+    case "light snow":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/23/cloudy-37012__340.png";
+      break;
+    case "heavy snow":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/23/cloudy-37012__340.png";
+      break;
+    case "snow":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/23/cloudy-37012__340.png";
+      break;
+    case "moderate or heavy snow showers":
+      return "https://cdn.pixabay.com/photo/2012/04/18/13/23/cloudy-37012__340.png";
+      break;
+    case "t-storms":
+      return "https://cdn.pixabay.com/photo/2017/08/21/21/26/cloud-cover-with-the-storm-2667024__340.png";
+      break;
+    case "sunny":
+      return "https://cdn.pixabay.com/photo/2013/07/13/10/23/sun-157126__340.png";
+      break;
+    case "mostly sunny":
+      return "https://cdn.pixabay.com/photo/2013/07/13/12/12/sun-159392__340.png";
+      break;
+    case "partly cloudy":
+      return "https://cdn.pixabay.com/photo/2017/01/17/16/46/cloud-1987416__340.png";
+      break;
+    case "partly sunny":
+      return "https://cdn.pixabay.com/photo/2017/01/17/16/46/cloud-1987416__340.png";
+      break;
+    case "mostly cloudy":
+      return "https://img.particlenews.com/image.php?type=thumbnail_1024x576&url=01RP6C_0LqigHSV00";
+      break;
+    case "cloudy":
+      return "https://img.particlenews.com/image.php?type=thumbnail_1024x576&url=01RP6C_0LqigHSV00";
+      break;
+    case "clear":
+      return "https://cdn.pixabay.com/photo/2013/07/13/12/12/sun-159392__340.png";
+      break;
+    case "mostly clear":
+      return "https://cdn.pixabay.com/photo/2013/07/13/12/12/sun-159392__340.png";
+      break;
+    case "mist":
+      return "https://cdn.pixabay.com/photo/2013/07/13/10/23/weather-157120__340.png";
+      break;
+    case "overcast":
+      return "https://cdn.pixabay.com/photo/2013/07/13/10/23/weather-157120__340.png";
+      break;
+    case "fog":
+      return "https://cdn.pixabay.com/photo/2013/07/13/10/23/weather-157120__340.png";
+      break;
+    default:
+      return "http://wallpapers-best.com/uploads/posts/2015-10/13_blue_sky.jpg";
+      break;
+  }
 };
 
 const removeElements = (elms) => elms.forEach((el) => el.remove());
