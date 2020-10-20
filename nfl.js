@@ -7,16 +7,6 @@ const URL_LOOKUP_LEAGUE = `https://www.thesportsdb.com/api/v1/json/1/lookupleagu
 const section = document.querySelector("section");
 const main = document.querySelector("main");
 
-const getNflGames = async () => {
-  const URL_LOOKUP_NFL_EVENTS = `https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=${NFL_ID}`;
-  try {
-    let response = await axios.get(URL_LOOKUP_NFL_EVENTS);
-    listNflGames(response.data.events);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 class Game {
   constructor(event, date, time, description, pic) {
     this.event = event;
@@ -45,6 +35,16 @@ class Game {
     section.appendChild(events);
   }
 }
+
+const getNflGames = async () => {
+  const URL_LOOKUP_NFL_EVENTS = `https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=${NFL_ID}`;
+  try {
+    let response = await axios.get(URL_LOOKUP_NFL_EVENTS);
+    listNflGames(response.data.events);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const listNflGames = (data) => {
   removeElements(document.querySelectorAll(".banner"));
@@ -79,7 +79,7 @@ const getNflTeams = async () => {
 };
 
 const fillNflDropdown = (data) => {
-  let dropDownDiv = document.querySelector("#nfl-dropdown");
+  let dropDownDiv = document.querySelector("#dropdown");
   let dropDown = document.createElement("select");
   dropDown.addEventListener("change", nflTeamPage);
   dropDown.addEventListener("change", getTeamSched);

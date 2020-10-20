@@ -25,11 +25,6 @@ nav {
   margin: 10px;
   color: white;
 }
-#contact {
-  display: flex;
-  flex-direction: row-reverse;
-  left: 500px;
-}
 a:link {
   text-decoration: none;
 }
