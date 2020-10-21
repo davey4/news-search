@@ -16,13 +16,13 @@
 1. clone this repo
 
    ```
-   git clone https://github.com/davey4/search-engine.git
+   git clone https://github.com/davey4/news-search.git
    ```
 
 2. go to folder
 
    ```
-   cd search-engine
+   cd news-search
    ```
 
 3. Open in your browser! :tada:
