@@ -115,59 +115,5 @@ mostPopClick.addEventListener("click", getMostPop);
 const clickTop = document.querySelector("#top-click");
 clickTop.addEventListener("click", getTopStories);
 
-FINHUB_API_KEY = "bu6qdbf48v6rghl7ibdg";
-
-const stockSearch = document.querySelector("#stock-search");
-const stockBtn = document.querySelector("#stock-btn");
-const aside = document.querySelector("aside");
-
-const searchStocks = async () => {
-  let search = stockSearch.value;
-  const PRICE_DATA_URL = `https://finnhub.io/api/v1/quote?symbol=${search}&token=${FINHUB_API_KEY}`;
-  try {
-    const response = await axios.get(PRICE_DATA_URL);
-    let priceData = response.data;
-    let data = {
-      symbol: search,
-      currentPrice: priceData.c,
-      openPrice: priceData.o,
-      highPrice: priceData.h,
-      lowPrice: priceData.l,
-    };
-    displayStocks(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const displayStocks = (data) => {
-  let results = document.createElement("div");
-  let resultHeader = document.createElement("h2");
-  let currentPriceDisplay = document.createElement("h3");
-  let openPriceDisplay = document.createElement("h3");
-  let highPriceDisplay = document.createElement("h3");
-  let lowPriceDisplay = document.createElement("h3");
-
-  results.className = "stock-result";
-  resultHeader.innerText = data.symbol.toUpperCase();
-  currentPriceDisplay.innerText = `Current Price is: $${data.currentPrice}`;
-  openPriceDisplay.innerText = `Opening Price: $${data.openPrice}`;
-  highPriceDisplay.innerText = `High Price of the Day: $${data.highPrice}`;
-  highPriceDisplay.style.color = "green";
-  lowPriceDisplay.innerText = `Low Price of the Day: $${data.lowPrice}`;
-  lowPriceDisplay.style.color = "red";
-
-  results.appendChild(resultHeader);
-  results.appendChild(currentPriceDisplay);
-  results.appendChild(openPriceDisplay);
-  results.appendChild(highPriceDisplay);
-  results.appendChild(lowPriceDisplay);
-  aside.appendChild(results);
-};
-
-stockSearch.addEventListener("change", searchStocks);
-stockBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-});
 
 window.onload = getTopStories;

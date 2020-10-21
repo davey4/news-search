@@ -97,29 +97,3 @@ h1 {
 .description {
   margin-top: 15px;
 }
-.stock-search {
-  position: absolute;
-  right: 3%;
-  display: flex;
-  flex-direction: column;
-}
-.stock-search input[type="text"] {
-  padding: 10px;
-  font-size: 15px;
-  font-style: bold;
-  border: 1px solid grey;
-  float: left;
-}
-.stock-search button{
-  float: left;
-  padding: 10px;
-  background: #151516;
-  color: white;
-  font-size: 15px;
-  border: 1px solid grey;
-  border-left: none;
-  cursor: pointer;
-}
-.stock-result{
-  font-size: 15px;
-}
