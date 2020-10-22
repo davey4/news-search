@@ -49,7 +49,7 @@ h1 {
   height: 275px;
   background-size: contain;
   background-position: center;
-  opacity: .5;
+  opacity: 0.5;
   font-weight: bolder;
   border-radius: 15px;
 }
@@ -84,12 +84,12 @@ form button {
 }
 aside {
   position: absolute;
-  right: 9%;
+  right: 4%;
   display: flex;
   flex-direction: column;
 }
 .comp {
-  opacity: .5;
+  opacity: 0.5;
   font-weight: bolder;
   background-repeat: no-repeat;
   background-position: 100% 100%;
@@ -98,7 +98,7 @@ aside {
 .stock-result {
   margin-top: 20px;
   font-size: 15px;
-  padding: 20px;
+  padding: 5px;
   border: 2px solid #2a95bf;
 }
 #story {
@@ -110,29 +110,28 @@ aside {
   width: 62%;
   border: 2px solid #595959;
   color: black;
-  /* box-shadow: 1px 2px 30px white; */
 }
 .story:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 #financials {
+  margin-left: 20px;
   width: 60%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 .financials {
-  /* width: 60%; */
   border: 2px solid #595959;
   margin: 5px;
 }
 #yearlyFinancials {
-  margin-top: 50px;
-  /* width: 60%; */
+  width: 95%;
+  margin: 50px 20px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-.yearlyFinancials{
+.yearlyFinancials {
   border: 2px solid #595959;
   margin: 5px;
 }
