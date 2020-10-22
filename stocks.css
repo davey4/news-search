@@ -2,6 +2,7 @@ body {
   font-family: "Roboto", sans-serif;
   font-style: italic;
   font-size: 200%;
+  /* background-color: #595959; */
 }
 nav {
   display: flex;
@@ -23,8 +24,11 @@ a:link:hover {
   border: 1px solid white;
 }
 header {
-  background-color: black;
-  color: white;
+  background-image: url('https://cdn.pixabay.com/photo/2018/03/10/09/45/businessman-3213659_960_720.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: black;
   height: 250px;
   margin-bottom: 20px;
   box-shadow: 1px 2px 30px white;
@@ -40,8 +44,6 @@ h1 {
   margin: 0px 10%;
   height: 275px;
   width: 500px;
-  /* border: 2px solid black; */
-  /* background-color: rgb(158, 148, 148); */
   margin-bottom: 30px;
 }
 .carousel-inner {
@@ -89,24 +91,37 @@ aside {
   background-repeat: no-repeat;
   background-position: 100% 100%;
   margin-left: 20px;
+  /* background-color: #bf0413; */
 }
 .stock-result {
-  margin-top: 10px;
+  margin-top: 20px;
   font-size: 15px;
+  padding: 20px;
+  border: 2px solid #2a95bf;
 }
-main{
-  /* display: grid; */
+#story{
   margin-top: 100px;
-
 }
 .story {
   margin-left: 10px;
   margin-bottom: 20px;
   width: 62%;
-  border: 2px solid black;
-  box-shadow: 1px 2px 30px white;
+  border: 2px solid #595959;
+  color: black;
+  /* box-shadow: 1px 2px 30px white; */
 }
 .story:hover{
   cursor: pointer;
   text-decoration: underline;
+}
+#financials{
+  /* margin-top: 100px; */
+  width: 62%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* grid-template-rows: 1fr 1fr; */
+}
+.financials{
+  border: 2px solid #595959;
+  margin: 5px;
 }

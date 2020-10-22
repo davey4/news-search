@@ -10,8 +10,9 @@ const socket = new WebSocket("wss://ws.finnhub.io?token=bu6qdbf48v6rghl7ibdg");
 const stockSearch = document.querySelector("#stock-search");
 const stockBtn = document.querySelector("#stock-btn");
 const stockPrice = document.querySelector(".stockPrice");
-const companyInfo = document.querySelector('.companyInfo')
-const main = document.querySelector("main");
+const companyInfo = document.querySelector(".companyInfo");
+const main = document.querySelector("#story");
+const financialsMain = document.querySelector('#financials')
 
 class LiveTrades {
   constructor(symbol, lastPrice, timeStamp, volume) {
@@ -44,7 +45,6 @@ class LiveTrades {
 
 // Connection opened -> Subscribe
 socket.addEventListener("open", function (event) {
-  // socket.send(JSON.stringify({ type: "subscribe", symbol: 'APPL' }));
   stockSearch.addEventListener("change", function () {
     let search = stockSearch.value.toUpperCase();
     socket.send(JSON.stringify({ type: "subscribe", symbol: `${search}` }));
@@ -81,7 +81,7 @@ class Story {
     headlineDiv.addEventListener("click", function () {
       window.open(`${url}`, "_blank");
     });
-
+    // headlineDiv.style.backgroundColor = '#595959'
     summaryDiv.innerText = this.summary;
 
     headlineDiv.appendChild(summaryDiv);
@@ -151,74 +151,146 @@ const displayStocks = (data) => {
 };
 
 class Company {
-  constructor(name, exchange, ipo, phone, weburl, logo){
-    this.name = name
-    this.exchange = exchange
-    this.ipo = ipo
-    this.phone = phone
-    this.weburl = weburl
-    this.logo = logo
+  constructor(name, exchange, ipo, share, phone, weburl, logo) {
+    this.name = name;
+    this.exchange = exchange;
+    this.ipo = ipo;
+    this.share = share;
+    this.phone = phone;
+    this.weburl = weburl;
+    this.logo = logo;
   }
-  displayComp(){
-    let nameDiv = document.createElement('div')
-    nameDiv.className = 'comp'
+  displayComp() {
+    let nameDiv = document.createElement("div");
+    nameDiv.className = "comp";
 
-    let exchangeDiv = document.createElement('div')
-    let ipoDiv = document.createElement('div')
-    let phoneDiv = document.createElement('div')
-    let weburlLink = document.createElement('a')
-    weburlLink.setAttribute('href', this.weburl)
+    let exchangeDiv = document.createElement("div");
+    let ipoDiv = document.createElement("div");
+    let shareDiv = document.createElement("div");
+    let phoneDiv = document.createElement("div");
+    let weburlLink = document.createElement("a");
+    weburlLink.setAttribute("href", this.weburl);
 
-    let logo = this.logo
-    nameDiv.style.backgroundImage = `url(${logo})`
+    let logo = this.logo;
+    nameDiv.style.backgroundImage = `url(${logo})`;
 
-    nameDiv.innerText = this.name
-    exchangeDiv.innerText = `Exchange: ${this.exchange}`
-    ipoDiv.innerText = `IPO: ${this.ipo}`
-    phoneDiv.innerText = `Phone num: ${this.phone}`
-    weburlLink.innerText = this.weburl
+    nameDiv.innerText = this.name;
+    exchangeDiv.innerText = `Exchange: ${this.exchange}`;
+    ipoDiv.innerText = `IPO: ${this.ipo}`;
+    shareDiv.innerText = `Outstanding shares : ${this.share}`;
+    phoneDiv.innerText = `Phone num: ${this.phone}`;
+    weburlLink.innerText = this.weburl;
 
-    nameDiv.appendChild(exchangeDiv)
-    nameDiv.appendChild(ipoDiv)
-    nameDiv.appendChild(phoneDiv)
-    nameDiv.appendChild(weburlLink)
-    companyInfo.appendChild(nameDiv)
+    nameDiv.appendChild(exchangeDiv);
+    nameDiv.appendChild(ipoDiv);
+    nameDiv.appendChild(shareDiv);
+    nameDiv.appendChild(phoneDiv);
+    nameDiv.appendChild(weburlLink);
+    companyInfo.appendChild(nameDiv);
   }
 }
 
-
-
-
-const getCompanyInfo = async() =>{
+const getCompanyInfo = async () => {
   let search = stockSearch.value.toUpperCase();
-  const COMP_INFO_URL = `https://finnhub.io/api/v1/stock/profile2?symbol=${search}&token=${FINHUB_API_KEY}`
+  const COMP_INFO_URL = `https://finnhub.io/api/v1/stock/profile2?symbol=${search}&token=${FINHUB_API_KEY}`;
   try {
-    let response = await axios.get(COMP_INFO_URL)
-    displayCompInfo(response.data)
+    let response = await axios.get(COMP_INFO_URL);
+    displayCompInfo(response.data);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-const displayCompInfo = (data) =>{
-  removeElements(document.querySelectorAll('.comp'))
-  let comp = new Company(data.name, data.exchange, data.ipo, data.phone, data.weburl, data.logo)
-  comp.displayComp()
-}
-
-
-
+const displayCompInfo = (data) => {
+  removeElements(document.querySelectorAll(".comp"));
+  let comp = new Company(
+    data.name,
+    data.exchange,
+    data.ipo,
+    data.shareOutstanding,
+    data.phone,
+    data.weburl,
+    data.logo
+  );
+  comp.displayComp();
+};
 
 const companyFinancials = async () => {
   let search = stockSearch.value;
   const FINANCIALS_URL = `https://finnhub.io/api/v1/stock/metric?symbol=${search}&metric=all&token=${FINHUB_API_KEY}`;
   try {
     let response = await axios.get(FINANCIALS_URL);
-    console.log(response.data)
+    displayCompFinancials(response.data.series.annual);
   } catch (error) {
     console.log(error);
   }
 };
+
+class Financials {
+  constructor(title, period, v){
+    this.title = title
+    this.period = period
+    this.v = v
+  }
+  displayFinancials(){
+    let titleDiv = document.createElement('div')
+    titleDiv.className = 'financials'
+    let periodDiv = document.createElement('div')
+    let vDiv = document.createElement('div')
+
+    titleDiv.innerText = this.title
+    periodDiv.innerText = `Period: ${this.period}`
+    vDiv.innerText = `${this.v}`
+    if(this.v > 0) {
+      titleDiv.style.backgroundColor = 'green'
+    } else {
+      titleDiv.style.backgroundColor = 'red'
+    }
+
+    titleDiv.appendChild(periodDiv)
+    titleDiv.appendChild(vDiv)
+    financialsMain.appendChild(titleDiv)
+  }
+}
+
+
+const displayCompFinancials = (data) =>{
+  console.log(data)
+  removeElements(document.querySelectorAll('.story'))
+  removeElements(document.querySelectorAll('.financials'))
+
+  let currRatio = data.currentRatio
+  let grossMargin = data.grossMargin
+  let netMargin = data.netMargin
+  let pretaxMargin = data.pretaxMargin
+  let salesPerShare = data.salesPerShare
+  let totalRatio = data.totalRatio
+  currRatio.forEach((element) =>{
+    let curr = new Financials('Current Ratio', element.period, element.v)
+    curr.displayFinancials()
+  })
+  grossMargin.forEach((element) => {
+    let gross = new Financials('Gross Margin', element.period, element.v)
+    gross.displayFinancials()
+  })
+  netMargin.forEach((element) =>{
+    let net = new Financials('Net Margin', element.period, element.v)
+    net.displayFinancials()
+  })
+  pretaxMargin.forEach((element) =>{
+    let pre = new Financials('Pre Tax Margin', element.period, element.v)
+    pre.displayFinancials()
+  })
+  salesPerShare.forEach((element)=>{
+    let sales = new Financials('Sales Per Share', element.period, element.v)
+    sales.displayFinancials()
+  })
+  totalRatio.forEach((element)=>{
+    let tot = new Financials('Total Ratio', element.period, element.v)
+    tot.displayFinancials()
+  })
+}
+
 
 
 const removeElements = (elms) => elms.forEach((el) => el.remove());
@@ -230,4 +302,4 @@ stockBtn.addEventListener("click", function (e) {
   e.preventDefault();
 });
 
-window.onload = getStories
+window.onload = getStories;
