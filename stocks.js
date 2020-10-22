@@ -242,7 +242,7 @@ class Metric {
     vDiv.innerText = this.value;
     if (this.value > 0) {
       titleDiv.style.backgroundColor = "green";
-    } else {
+    } else if(this.value < 0) {
       titleDiv.style.backgroundColor = "red";
     }
 
