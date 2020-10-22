@@ -12,7 +12,8 @@ const stockBtn = document.querySelector("#stock-btn");
 const stockPrice = document.querySelector(".stockPrice");
 const companyInfo = document.querySelector(".companyInfo");
 const main = document.querySelector("#story");
-const financialsMain = document.querySelector('#financials')
+const financialsMain = document.querySelector("#financials");
+const yearlyFinancials = document.querySelector('#yearlyFinancials')
 
 class LiveTrades {
   constructor(symbol, lastPrice, timeStamp, volume) {
@@ -34,7 +35,8 @@ class LiveTrades {
     carouselItem.innerText = `Company: ${this.symbol}`;
     priceDiv.innerText = `Price: $${this.price}`;
     timeDiv.innerText = `Time Stamp: ${this.time}`;
-    volumeDiv.innerText = `Volume: ${this.volume} shares`;
+    volumeDiv.innerText = `Volume: ${this.volume}`;
+    carouselItem.style.backgroundColor = "white";
 
     carouselItem.appendChild(priceDiv);
     carouselItem.appendChild(timeDiv);
@@ -43,7 +45,6 @@ class LiveTrades {
   }
 }
 
-// Connection opened -> Subscribe
 socket.addEventListener("open", function (event) {
   stockSearch.addEventListener("change", function () {
     let search = stockSearch.value.toUpperCase();
@@ -51,7 +52,6 @@ socket.addEventListener("open", function (event) {
   });
 });
 
-// Listen for messages
 socket.addEventListener("message", function (event) {
   let newEvent = JSON.parse(event.data);
 
@@ -81,7 +81,7 @@ class Story {
     headlineDiv.addEventListener("click", function () {
       window.open(`${url}`, "_blank");
     });
-    // headlineDiv.style.backgroundColor = '#595959'
+
     summaryDiv.innerText = this.summary;
 
     headlineDiv.appendChild(summaryDiv);
@@ -173,6 +173,7 @@ class Company {
 
     let logo = this.logo;
     nameDiv.style.backgroundImage = `url(${logo})`;
+    nameDiv.style.backgroundColor = "white";
 
     nameDiv.innerText = this.name;
     exchangeDiv.innerText = `Exchange: ${this.exchange}`;
@@ -220,78 +221,112 @@ const companyFinancials = async () => {
   const FINANCIALS_URL = `https://finnhub.io/api/v1/stock/metric?symbol=${search}&metric=all&token=${FINHUB_API_KEY}`;
   try {
     let response = await axios.get(FINANCIALS_URL);
-    displayCompFinancials(response.data.series.annual);
+    displayMetric(response.data.metric);
+    displayCompYearlyFinancials(response.data.series.annual);
   } catch (error) {
     console.log(error);
   }
 };
 
-class Financials {
-  constructor(title, period, v){
-    this.title = title
-    this.period = period
-    this.v = v
+class Metric {
+  constructor(title, value) {
+    this.title = title;
+    this.value = value;
   }
-  displayFinancials(){
-    let titleDiv = document.createElement('div')
-    titleDiv.className = 'financials'
-    let periodDiv = document.createElement('div')
-    let vDiv = document.createElement('div')
+  diplayMet() {
+    let titleDiv = document.createElement("div");
+    titleDiv.className = "financials";
+    let vDiv = document.createElement("div");
 
-    titleDiv.innerText = this.title
-    periodDiv.innerText = `Period: ${this.period}`
-    vDiv.innerText = `${this.v}`
-    if(this.v > 0) {
-      titleDiv.style.backgroundColor = 'green'
+    titleDiv.innerText = `${this.title}:`;
+    vDiv.innerText = this.value;
+    if (this.value > 0) {
+      titleDiv.style.backgroundColor = "green";
     } else {
-      titleDiv.style.backgroundColor = 'red'
+      titleDiv.style.backgroundColor = "red";
     }
 
-    titleDiv.appendChild(periodDiv)
-    titleDiv.appendChild(vDiv)
-    financialsMain.appendChild(titleDiv)
+    titleDiv.appendChild(vDiv);
+    financialsMain.appendChild(titleDiv);
   }
 }
 
+const displayMetric = (data) => {
+  removeElements(document.querySelectorAll(".story"));
+  removeElements(document.querySelectorAll(".financials"));
+  removeElements(document.querySelectorAll('.yearlyFinancials'))
+  console.log(data);
+  for (const key in data) {
+    let metrics = new Metric(key, `${data[key]}`);
+    metrics.diplayMet();
+  }
+};
 
-const displayCompFinancials = (data) =>{
-  console.log(data)
-  removeElements(document.querySelectorAll('.story'))
-  removeElements(document.querySelectorAll('.financials'))
+class Financials {
+  constructor(title, period, v) {
+    this.title = title;
+    this.period = period;
+    this.v = v;
+  }
+  displayFinancials() {
+    let titleDiv = document.createElement("div");
+    titleDiv.className = "yearlyFinancials";
+    let periodDiv = document.createElement("div");
+    let vDiv = document.createElement("div");
 
-  let currRatio = data.currentRatio
-  let grossMargin = data.grossMargin
-  let netMargin = data.netMargin
-  let pretaxMargin = data.pretaxMargin
-  let salesPerShare = data.salesPerShare
-  let totalRatio = data.totalRatio
-  currRatio.forEach((element) =>{
-    let curr = new Financials('Current Ratio', element.period, element.v)
-    curr.displayFinancials()
-  })
-  grossMargin.forEach((element) => {
-    let gross = new Financials('Gross Margin', element.period, element.v)
-    gross.displayFinancials()
-  })
-  netMargin.forEach((element) =>{
-    let net = new Financials('Net Margin', element.period, element.v)
-    net.displayFinancials()
-  })
-  pretaxMargin.forEach((element) =>{
-    let pre = new Financials('Pre Tax Margin', element.period, element.v)
-    pre.displayFinancials()
-  })
-  salesPerShare.forEach((element)=>{
-    let sales = new Financials('Sales Per Share', element.period, element.v)
-    sales.displayFinancials()
-  })
-  totalRatio.forEach((element)=>{
-    let tot = new Financials('Total Ratio', element.period, element.v)
-    tot.displayFinancials()
-  })
+    titleDiv.innerText = this.title;
+    periodDiv.innerText = `Period: ${this.period}`;
+    vDiv.innerText = `Volume :${this.v}`;
+    if (this.v > 0) {
+      titleDiv.style.backgroundColor = "green";
+    } else {
+      titleDiv.style.backgroundColor = "red";
+    }
+
+    titleDiv.appendChild(periodDiv);
+    titleDiv.appendChild(vDiv);
+    yearlyFinancials.appendChild(titleDiv);
+  }
 }
 
+const displayCompYearlyFinancials = (data) => {
+  let yearly = document.createElement("div");
+  yearly.className = "yearlyFinancials";
+  yearly.innerText = "Yearly Financial's";
+  yearlyFinancials.appendChild(yearly);
 
+  let currRatio = data.currentRatio;
+  let grossMargin = data.grossMargin;
+  let netMargin = data.netMargin;
+  let pretaxMargin = data.pretaxMargin;
+  let salesPerShare = data.salesPerShare;
+  let totalRatio = data.totalRatio;
+
+  currRatio.forEach((element) => {
+    let curr = new Financials("Current Ratio", element.period, element.v);
+    curr.displayFinancials();
+  });
+  grossMargin.forEach((element) => {
+    let gross = new Financials("Gross Margin", element.period, element.v);
+    gross.displayFinancials();
+  });
+  netMargin.forEach((element) => {
+    let net = new Financials("Net Margin", element.period, element.v);
+    net.displayFinancials();
+  });
+  pretaxMargin.forEach((element) => {
+    let pre = new Financials("Pre Tax Margin", element.period, element.v);
+    pre.displayFinancials();
+  });
+  salesPerShare.forEach((element) => {
+    let sales = new Financials("Sales Per Share", element.period, element.v);
+    sales.displayFinancials();
+  });
+  totalRatio.forEach((element) => {
+    let tot = new Financials("Total Ratio", element.period, element.v);
+    tot.displayFinancials();
+  });
+};
 
 const removeElements = (elms) => elms.forEach((el) => el.remove());
 

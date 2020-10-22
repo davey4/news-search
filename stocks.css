@@ -2,7 +2,6 @@ body {
   font-family: "Roboto", sans-serif;
   font-style: italic;
   font-size: 200%;
-  /* background-color: #595959; */
 }
 nav {
   display: flex;
@@ -24,12 +23,12 @@ a:link:hover {
   border: 1px solid white;
 }
 header {
-  background-image: url('https://cdn.pixabay.com/photo/2018/03/10/09/45/businessman-3213659_960_720.jpg');
+  background-image: url("https://cdn.pixabay.com/photo/2018/03/10/09/45/businessman-3213659_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   color: black;
-  height: 250px;
+  height: 550px;
   margin-bottom: 20px;
   box-shadow: 1px 2px 30px white;
 }
@@ -50,7 +49,9 @@ h1 {
   height: 275px;
   background-size: contain;
   background-position: center;
+  opacity: .5;
   font-weight: bolder;
+  border-radius: 15px;
 }
 .d-block {
   margin-top: 20px;
@@ -87,11 +88,12 @@ aside {
   display: flex;
   flex-direction: column;
 }
-.comp{
+.comp {
+  opacity: .5;
+  font-weight: bolder;
   background-repeat: no-repeat;
   background-position: 100% 100%;
   margin-left: 20px;
-  /* background-color: #bf0413; */
 }
 .stock-result {
   margin-top: 20px;
@@ -99,7 +101,7 @@ aside {
   padding: 20px;
   border: 2px solid #2a95bf;
 }
-#story{
+#story {
   margin-top: 100px;
 }
 .story {
@@ -110,18 +112,27 @@ aside {
   color: black;
   /* box-shadow: 1px 2px 30px white; */
 }
-.story:hover{
+.story:hover {
   cursor: pointer;
   text-decoration: underline;
 }
-#financials{
-  /* margin-top: 100px; */
-  width: 62%;
+#financials {
+  width: 60%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  /* grid-template-rows: 1fr 1fr; */
+  grid-template-columns: 1fr 1fr;
 }
-.financials{
+.financials {
+  /* width: 60%; */
+  border: 2px solid #595959;
+  margin: 5px;
+}
+#yearlyFinancials {
+  margin-top: 50px;
+  /* width: 60%; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.yearlyFinancials{
   border: 2px solid #595959;
   margin: 5px;
 }

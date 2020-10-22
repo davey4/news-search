@@ -216,31 +216,31 @@ const displayAstronamy = (data) => {
 
 const backgroundImage = (condition) => {
   switch (true) {
-    case condition.split(' ').includes('rain'):
+    case condition.split(" ").includes("rain"):
       return "https://cdn.pixabay.com/photo/2012/04/18/13/22/cloud-37011__340.png";
       break;
-    case condition.split(' ').includes('snow'):
+    case condition.split(" ").includes("snow"):
       return "https://cdn.pixabay.com/photo/2012/04/18/13/23/cloudy-37012__340.png";
       break;
-    case condition.split(' ').includes('storm'):
+    case condition.split(" ").includes("storm"):
       return "https://cdn.pixabay.com/photo/2017/08/21/21/26/cloud-cover-with-the-storm-2667024__340.png";
       break;
-    case condition.split(' ').includes("sunny"):
+    case condition.split(" ").includes("sunny"):
       return "https://cdn.pixabay.com/photo/2013/07/13/10/23/sun-157126__340.png";
       break;
-    case condition.split(' ').includes("cloudy"):
+    case condition.split(" ").includes("cloudy"):
       return "https://cdn.pixabay.com/photo/2017/01/17/16/46/cloud-1987416__340.png";
       break;
-    case condition.split(' ').includes("clear"):
+    case condition.split(" ").includes("clear"):
       return "https://cdn.pixabay.com/photo/2013/07/13/12/12/sun-159392__340.png";
       break;
-    case condition.split(' ').includes("mist"):
+    case condition.split(" ").includes("mist"):
       return "https://cdn.pixabay.com/photo/2013/07/13/10/23/weather-157120__340.png";
       break;
-    case condition.split(' ').includes("overcast"):
+    case condition.split(" ").includes("overcast"):
       return "https://cdn.pixabay.com/photo/2013/07/13/10/23/weather-157120__340.png";
       break;
-    case condition.split(' ').includes("fog"):
+    case condition.split(" ").includes("fog"):
       return "https://cdn.pixabay.com/photo/2013/07/13/10/23/weather-157120__340.png";
       break;
     default:
