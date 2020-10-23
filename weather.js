@@ -1,5 +1,5 @@
 const API_KEY = "?key=2ed0a5cd6d8a419489101829201710";
-const BASE_URL = `http://api.weatherapi.com/v1`;
+const BASE_URL = `https://api.weatherapi.com/v1`;
 
 const searchBar = document.querySelector("#search-bar");
 const searchBtn = document.querySelector("#search-btn");
@@ -42,7 +42,7 @@ const intitialSearch = () => {
 };
 
 const getCurrentWeather = async (search) => {
-  const CURRENT_WEATHER = `http://api.weatherapi.com/v1/current.json${API_KEY}&q=${search}`;
+  const CURRENT_WEATHER = `https://api.weatherapi.com/v1/current.json${API_KEY}&q=${search}`;
   try {
     let response = await axios.get(CURRENT_WEATHER);
     displayCurrentWeather(response.data);
@@ -244,7 +244,7 @@ const backgroundImage = (condition) => {
       return "https://cdn.pixabay.com/photo/2013/07/13/10/23/weather-157120__340.png";
       break;
     default:
-      return "http://wallpapers-best.com/uploads/posts/2015-10/13_blue_sky.jpg";
+      return "https://wallpapers-best.com/uploads/posts/2015-10/13_blue_sky.jpg";
       break;
   }
 };
