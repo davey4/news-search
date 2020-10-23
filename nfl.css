@@ -68,8 +68,8 @@ select {
   background-position: center;
   background-repeat: no-repeat;
   margin-top: 70px;
-  width: 98%;
-  height: 350px;
+  width: 100%;
+  height: 300px;
 }
 #upcoming-games {
   position: relative;
